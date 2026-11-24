@@ -1,0 +1,19 @@
+{#
+    One template for simple message pages: 404 and 500.
+    Receives: code (optional), heading, text.
+#}
+{% extends "base.html" %}
+
+{% block title %}{{ heading }} · {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="container message-page">
+    {% if code %}<p class="message-page__code">{{ code }}</p>{% endif %}
+    <h1>{{ heading }}</h1>
+    <p>{{ text }}</p>
+    <div class="cluster">
+        <a class="btn btn--primary" href="{{ url_for('pages.home') }}">Go to the home page</a>
+        <a class="btn btn--secondary" href="{{ url_for('pages.safety') }}">Safety Center</a>
+    </div>
+</section>
+{% endblock %}

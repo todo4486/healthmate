@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{#
+    Child templates can set, before any block:
+        {% set page_access = "private" %}     signed-in users only (Dashboard, Habits)
+        {% set page_access = "guest-only" %}  signed-out users only (Login, Register)
+    Pages default to "public".
+#}
+{% set access = page_access | default("public") %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
+    <meta name="description" content="{% block description -%}
+        HealthMate offers general symptom guidance, health education, habit tracking
+        and safety information. Educational use only.
+    {%- endblock %}">
+    <meta name="theme-color" content="#0f766e">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.svg') }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script nonce="{{ csp_nonce() }}">
+        // Runs before the page appears, so the header shows the right buttons straight away.
+        document.documentElement.classList.add("js");
+        try {
+            if (localStorage.getItem("hm-auth") === "user") {
+                document.documentElement.dataset.auth = "user";
+            }
+        } catch (error) { /* storage blocked: auth.js will set the state */ }
+    </script>
+</head>
+<body data-access="{{ access }}">
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    {% include "partials/_nav.html" %}
+
+    <main id="main" tabindex="-1">
+        {% if access == "private" %}
+        {# Private content stays hidden until auth.js confirms someone is signed in. #}
+        <div class="container loading" data-auth-loading role="status">Checking your sign-in…</div>
+        <noscript><p class="container">Please turn on JavaScript to use this page.</p></noscript>
+        <div data-private-content hidden>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+        {% if access == "private" %}</div>{% endif %}
+    </main>
+
+    {% include "partials/_footer.html" %}
+
+    <script type="module" src="{{ url_for('static', filename='js/ui.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

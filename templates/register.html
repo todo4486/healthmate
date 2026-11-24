@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% from "partials/_ui.html" import text_field, password_field, google_button %}
+{% set page_access = "guest-only" %}
+
+{% block title %}Create your account · {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="container auth">
+    <div class="card card--raised auth__card">
+        <div class="auth__header">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" width="44" height="44">
+            <h1>Create your account</h1>
+            <p>Free, private and takes less than a minute.</p>
+        </div>
+
+        <div class="stack">
+            <div class="banner banner--warn form-message" data-form-message role="alert"></div>
+
+            {{ google_button("Sign up with Google") }}
+            <p class="divider">or sign up with email</p>
+
+            <form class="form" id="register-form" novalidate>
+                {{ text_field("name", "First name", autocomplete="given-name", maxlength="60") }}
+                {{ text_field("email", "Email", type="email", autocomplete="email") }}
+                {{ password_field("password", "Password", "new-password",
+                                  hint="At least 8 characters.") }}
+                {{ password_field("confirm", "Confirm password", "new-password") }}
+
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox" name="acknowledge" required aria-describedby="acknowledge-error">
+                        <span>I understand that HealthMate gives general information only and is not medical advice.</span>
+                    </label>
+                    <p class="field-error" id="acknowledge-error"></p>
+                </div>
+
+                <button class="btn btn--primary btn--block" type="submit">Create account</button>
+            </form>
+        </div>
+
+        <p class="auth__switch">Already have an account? <a href="{{ url_for('pages.login') }}">Log in</a></p>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/auth-forms.js') }}"></script>
+{% endblock %}

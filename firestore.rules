@@ -1,0 +1,95 @@
+rules_version = '2';
+
+// HealthMate Firestore security rules.
+//
+// These rules are the REAL protection for user data. Google enforces them on
+// its servers for every read and write, whatever the browser code does.
+// They only take effect once published:
+//   Firebase console → Firestore Database → Rules → paste this file → Publish.
+//
+// Summary: every document lives under users/{uid}. Only the signed-in user
+// whose id is {uid} can read or write it, and only with the expected fields.
+// Anything not listed here is denied.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Helpers ----------
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    function data() {
+      return request.resource.data;
+    }
+
+    function isShortText(value, maxLength) {
+      return value is string && value.size() <= maxLength;
+    }
+
+    // ---------- users/{uid}: profile ----------
+    match /users/{uid} {
+      allow read, delete: if isOwner(uid);
+
+      allow create: if isOwner(uid)
+        && data().keys().hasOnly(['displayName', 'createdAt'])
+        && isShortText(data().displayName, 60)
+        && data().createdAt == request.time;
+
+      // Only the name can change; createdAt stays as it was.
+      allow update: if isOwner(uid)
+        && data().keys().hasOnly(['displayName', 'createdAt'])
+        && isShortText(data().displayName, 60)
+        && data().createdAt == resource.data.createdAt;
+
+      // ---------- habits ----------
+      match /habits/{habitId} {
+        allow read, delete: if isOwner(uid);
+
+        allow create: if isOwner(uid)
+          && data().keys().hasOnly(['name', 'category', 'createdAt'])
+          && data().name is string
+          && data().name.size() >= 1
+          && data().name.size() <= 60
+          && data().category in ['hydration', 'sleep', 'exercise', 'nutrition', 'mental', 'other']
+          && data().createdAt == request.time;
+
+        // Habits are never edited, only created and deleted.
+        allow update: if false;
+      }
+
+      // ---------- habitLogs: one document per day, e.g. 2026-11-24 ----------
+      match /habitLogs/{day} {
+        allow read, delete: if isOwner(uid);
+
+        allow create, update: if isOwner(uid)
+          && day.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+          && data().keys().hasOnly(['completed', 'updatedAt'])
+          && data().completed is list
+          && data().completed.size() <= 50
+          && data().updatedAt == request.time;
+      }
+
+      // ---------- symptomChecks: saved only when the user chooses ----------
+      // No free text is stored: only the options the user ticked and the result.
+      match /symptomChecks/{checkId} {
+        allow read, delete: if isOwner(uid);
+
+        allow create: if isOwner(uid)
+          && data().keys().hasOnly(['symptoms', 'duration', 'severity', 'ageGroup', 'level', 'createdAt'])
+          && data().symptoms is list
+          && data().symptoms.size() >= 1
+          && data().symptoms.size() <= 20
+          && data().duration in ['under_1_day', '1_3_days', '4_7_days', 'over_1_week']
+          && data().severity in ['mild', 'moderate', 'severe']
+          && data().ageGroup in ['under_5', '5_17', '18_64', '65_plus']
+          && data().level in ['self_care', 'doctor', 'urgent']
+          && data().createdAt == request.time;
+
+        // A saved check is a record: it can be deleted but not changed.
+        allow update: if false;
+      }
+    }
+  }
+}

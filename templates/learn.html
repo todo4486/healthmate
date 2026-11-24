@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+{% from "partials/_ui.html" import page_header, article_card %}
+
+{% block title %}Health Library · {{ site_name }}{% endblock %}
+
+{% block content %}
+{{ page_header("Health Library", "Learn the basics that matter",
+               "Short, practical guides to the everyday habits that make the biggest difference to your health.") }}
+
+<div class="container page-body stack">
+    <section aria-labelledby="topics-title">
+        <h2 class="section-title" id="topics-title">Browse by topic</h2>
+        <div class="grid grid--3">
+            {% for category in categories %}
+            <a class="card category-card" href="{{ url_for('pages.learn_category', category_id=category.id) }}">
+                <span class="icon-badge">{{ icon(category.icon) }}</span>
+                <span class="category-card__text">
+                    <span class="category-card__title">{{ category.title }}</span>
+                    <span class="category-card__description">{{ category.description }}</span>
+                    <span class="category-card__count">
+                        {{ counts[category.id] }} article{{ "" if counts[category.id] == 1 else "s" }}
+                    </span>
+                </span>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section aria-labelledby="all-title">
+        <h2 class="section-title" id="all-title">All articles</h2>
+        <div class="grid grid--3">
+            {% for article in articles %}
+            {{ article_card(article, categories | selectattr("id", "equalto", article.category) | first) }}
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
+<section class="page-end">
+    <div class="container">
+        {% include "partials/_disclaimer.html" %}
+    </div>
+</section>
+{% endblock %}

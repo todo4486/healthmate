@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+{% set page_access = "private" %}
+
+{% block title %}Dashboard · {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container page-header__inner">
+        <div class="dash-greeting">
+            <span class="eyebrow" data-today>Today</span>
+            <h1>Hello, <span data-user-first-name>there</span></h1>
+            <p>Here is your wellness overview for today.</p>
+        </div>
+        <div class="cluster">
+            <a class="btn btn--secondary" href="{{ url_for('pages.symptoms') }}">{{ icon("pulse") }} Check symptoms</a>
+            <a class="btn btn--primary" href="{{ url_for('pages.habits') }}">{{ icon("check-square") }} Track habits</a>
+        </div>
+    </div>
+</section>
+
+<div class="container page-body stack">
+    <div class="banner banner--danger" data-dashboard-error role="alert" hidden>
+        {{ icon("alert") }}
+        <p data-dashboard-error-text></p>
+    </div>
+
+    {# ---------- Today's overview: real numbers only ("…" while loading) ---------- #}
+    <section aria-labelledby="overview-title">
+        <h2 class="sr-only" id="overview-title">Today's overview</h2>
+        <div class="stat-grid stat-grid--4">
+            {% for key, icon_name, label in [
+                ("done", "check-square", "Habits completed today"),
+                ("total", "chart", "Active habits"),
+                ("percent", "pulse", "Today's progress"),
+                ("checks", "book", "Saved symptom checks"),
+            ] %}
+            <div class="card stat">
+                <span class="icon-badge">{{ icon(icon_name) }}</span>
+                <div>
+                    <p class="stat__value" data-stat="{{ key }}">…</p>
+                    <p class="stat__label">{{ label }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <div class="with-sidebar">
+        <div class="stack">
+            {% include "partials/_habit_progress.html" %}
+
+            <section class="card" aria-labelledby="today-title">
+                <div class="card__header">
+                    <h2 class="card__title" id="today-title">Today's habits</h2>
+                    <a class="card__link" href="{{ url_for('pages.habits') }}">Manage habits {{ icon("arrow-right", "icon--sm") }}</a>
+                </div>
+                <p class="loading" data-habits-loading role="status">Loading your habits…</p>
+                <ul class="habit-list" data-habit-list aria-live="polite"></ul>
+                <div class="empty-state" data-habits-empty hidden>
+                    <span class="icon-badge">{{ icon("check-square") }}</span>
+                    <h3>No habits yet</h3>
+                    <p>Add one or two small habits to start tracking your progress here.</p>
+                    <a class="btn btn--secondary btn--sm" href="{{ url_for('pages.habits') }}">Add your first habit</a>
+                </div>
+            </section>
+
+            <section class="card" aria-labelledby="checks-title">
+                <div class="card__header">
+                    <h2 class="card__title" id="checks-title">Recent symptom checks</h2>
+                    <a class="card__link" href="{{ url_for('pages.symptoms') }}">Symptom Guide {{ icon("arrow-right", "icon--sm") }}</a>
+                </div>
+                <p class="loading" data-checks-loading role="status">Loading your history…</p>
+                <ul class="check-history" data-check-list></ul>
+                <div class="empty-state" data-checks-empty hidden>
+                    <span class="icon-badge">{{ icon("pulse") }}</span>
+                    <h3>No saved checks</h3>
+                    <p>When you use the Symptom Guide, you can choose to save the result. Saved results appear here.</p>
+                    <a class="btn btn--secondary btn--sm" href="{{ url_for('pages.symptoms') }}">Check symptoms</a>
+                </div>
+                <p class="hint check-history__note">
+                    Only the options you ticked and the result are saved, never your written description.
+                    You can delete any saved check.
+                </p>
+            </section>
+        </div>
+
+        <aside class="stack">
+            <section class="card" aria-labelledby="actions-title">
+                <h2 class="card__title" id="actions-title">Quick actions</h2>
+                <ul class="quick-actions">
+                    {% for endpoint, icon_name, label in [
+                        ("pages.symptoms", "pulse", "Check symptoms"),
+                        ("pages.habits", "check-square", "Track habits"),
+                        ("pages.assistant", "chat", "Ask the Wellness Assistant"),
+                        ("pages.learn", "book", "Explore the Health Library"),
+                    ] %}
+                    <li>
+                        <a class="quick-action" href="{{ url_for(endpoint) }}">
+                            <span class="icon-badge">{{ icon(icon_name) }}</span>
+                            {{ label }}
+                            {{ icon("arrow-right", "icon--sm icon-arrow") }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <div class="banner banner--danger">
+                {{ icon("phone") }}
+                <p>
+                    <strong>Emergency?</strong> Call <a href="tel:112">112</a>, or see the
+                    <a href="{{ url_for('pages.safety') }}">Safety Center</a>.
+                </p>
+            </div>
+        </aside>
+    </div>
+</div>
+
+{% include "partials/_habit_template.html" %}
+
+{# One saved symptom check. Copied by dashboard.js. #}
+<template id="check-template">
+    <li class="check-item">
+        <div class="check-item__body">
+            <div class="cluster">
+                <span class="tag" data-check-level></span>
+                <time class="muted text-sm" data-check-date></time>
+            </div>
+            <p class="check-item__symptoms" data-check-symptoms></p>
+            <p class="muted text-sm" data-check-details></p>
+        </div>
+        <button class="btn btn--ghost btn--icon" type="button" data-check-delete>{{ icon("trash") }}</button>
+    </li>
+</template>
+
+{# Labels for the ids stored in saved checks (read by dashboard.js, never executed). #}
+<script type="application/json" id="symptom-labels">{{ symptom_labels | tojson }}</script>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

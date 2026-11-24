@@ -1,0 +1,52 @@
+{% from "partials/_icons.html" import icon %}
+<header class="site-header">
+    <nav class="container nav" aria-label="Main">
+        <a class="brand" href="{{ url_for('pages.home') }}">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" width="32" height="32">
+            <span>{{ site_name }}</span>
+        </a>
+
+        {# On small screens the menu is collapsed, so this copy keeps Emergency always visible. #}
+        <a class="nav__emergency nav__emergency--compact" href="{{ url_for('pages.safety') }}">
+            {{ icon("phone") }} Emergency
+        </a>
+
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+            {{ icon("menu", "icon-open") }}{{ icon("close", "icon-close") }}
+        </button>
+
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__links">
+                {% for item in nav_items %}
+                <li>
+                    <a href="{{ url_for(item.endpoint) }}"
+                       {%- if request.endpoint == item.endpoint %} aria-current="page"{% endif %}>
+                        {{- item.label -}}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div class="nav__actions">
+                <a class="nav__emergency" href="{{ url_for('pages.safety') }}">
+                    {{ icon("phone") }} Emergency
+                </a>
+
+                {# Shown when signed out #}
+                <a class="btn btn--ghost btn--sm" data-auth-show="guest"
+                   href="{{ url_for('pages.login') }}">Log in</a>
+                <a class="btn btn--primary btn--sm" data-auth-show="guest"
+                   href="{{ url_for('pages.register') }}">Sign up</a>
+
+                {# Shown when signed in (filled in by auth.js) #}
+                <span class="nav__user" data-auth-show="user">
+                    <span class="avatar" data-user-initial aria-hidden="true"></span>
+                    <span class="nav__user-name" data-user-name></span>
+                </span>
+                <button class="btn btn--ghost btn--sm" type="button" data-auth-show="user" data-logout>
+                    {{ icon("log-out", "icon--sm") }} Log out
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>

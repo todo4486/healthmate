@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+
+{% block title %}Wellness Assistant · {{ site_name }}{% endblock %}
+
+{% block content %}
+<div class="container container--narrow page-body">
+    <section class="card chat" aria-labelledby="chat-title">
+        <header class="chat__header">
+            <span class="icon-badge icon-badge--solid">{{ icon("chat") }}</span>
+            <div>
+                <h1 id="chat-title">Wellness Assistant</h1>
+                <p>Pre-written answers from HealthMate's wellness guide. Not AI, and not medical advice.</p>
+            </div>
+        </header>
+
+        <div class="chat__messages" data-chat-messages aria-live="polite">
+            <div class="chat__welcome" data-chat-welcome>
+                <span class="icon-badge">{{ icon("chat") }}</span>
+                <h2>Hello! How can I help today?</h2>
+                <p>
+                    I can share general tips on sleep, stress, activity, healthy eating and hydration.
+                    I use a set of pre-written answers, so I can't understand everything, and I can't
+                    diagnose or recommend medicines.
+                </p>
+                <div class="suggestions">
+                    {% for question in [
+                        "How can I improve my sleep?",
+                        "How can I manage stress?",
+                        "How can I stay physically active?",
+                        "What are some healthy eating habits?",
+                        "How can I improve my hydration?",
+                    ] %}
+                    <button class="suggestion" type="button" data-chat-suggestion>{{ question }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <form class="chat__composer" id="chat-form" novalidate>
+            <label class="sr-only" for="chat-input">Your question</label>
+            <input class="input" id="chat-input" name="message" maxlength="500" autocomplete="off"
+                   placeholder="Type a wellness question…">
+            <button class="btn btn--primary btn--icon" type="submit" aria-label="Send">{{ icon("send") }}</button>
+        </form>
+        <p class="chat__note">
+            Conversations are not saved. In an emergency, don't wait for an answer: call <a href="tel:112">112</a>.
+        </p>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/assistant.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{# Today's habit progress. Filled in by habit-view.js. Used on Habits and Dashboard. #}
+<section class="card habit-summary" aria-labelledby="progress-title" data-habit-summary>
+    <div class="habit-summary__row">
+        <h2 class="card__title" id="progress-title">Today's progress</h2>
+        <span class="muted text-sm" data-today-date></span>
+    </div>
+    <p class="habit-summary__count">
+        <span data-habit-count>–</span>
+        <span class="muted" data-habit-percent></span>
+    </p>
+    <div class="progress" role="progressbar" aria-labelledby="progress-title"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress__bar" data-habit-bar></div>
+    </div>
+</section>

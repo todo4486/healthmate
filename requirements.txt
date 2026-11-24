@@ -1,3 +1,13 @@
 # Packages needed to run HealthMate in production.
+# Every version is pinned so the live site uses exactly what was tested.
 Flask==3.1.3
 gunicorn==27.0.1
+
+# Installed automatically with the two above (pinned for repeatable builds)
+blinker==1.9.0
+click==8.5.1
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.4
+packaging==26.4
+Werkzeug==3.1.9

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+
+{% block title %}Safety Center · {{ site_name }}{% endblock %}
+{% block description %}Emergency numbers for India, warning signs that need urgent care, and what to do while help is on the way.{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <span class="eyebrow">Safety Center</span>
+        <h1>Getting help quickly</h1>
+        <p>
+            HealthMate can't assess emergencies. If you think you or someone else needs urgent help,
+            contact emergency services straight away.
+        </p>
+    </div>
+</section>
+
+<div class="container page-body stack">
+    {# Emergency numbers first, so they are never hidden behind a click or scroll. #}
+    <section class="callout callout--stack" aria-labelledby="call-title">
+        <h2 id="call-title">In an emergency, call 112</h2>
+        <div class="call-grid">
+            {% for item in safety.numbers %}
+            <a class="call-card{% if not item.urgent %} call-card--calm{% endif %}" href="tel:{{ item.number }}">
+                <span class="icon-badge">{{ icon("phone") }}</span>
+                <span>
+                    <span class="call-card__number">{{ item.number }}</span>
+                    <span class="call-card__label">{{ item.label }}</span>
+                </span>
+            </a>
+            {% endfor %}
+        </div>
+        <p class="call-note">{{ safety.numbers_note }} On a phone, tap a number to call it.</p>
+    </section>
+
+    <section aria-labelledby="signs-title">
+        <h2 id="signs-title">Call 112 now if you notice</h2>
+        <p class="lead">Don't wait to see if these get better.</p>
+        <div class="grid grid--3">
+            {% for sign in safety.warning_signs %}
+            <article class="card sign-card">
+                <span class="icon-badge icon-badge--danger">{{ icon("alert") }}</span>
+                <div>
+                    <h3>{{ sign.title }}</h3>
+                    <p>{{ sign.detail }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <div class="grid grid--2">
+        <section class="card" aria-labelledby="soon-title">
+            <h2 class="card__title" id="soon-title">Get medical advice within 24 hours if</h2>
+            <ul class="bullet-list">
+                {% for item in safety.see_doctor_soon %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="card" aria-labelledby="waiting-title">
+            <h2 class="card__title" id="waiting-title">While you wait for help</h2>
+            <ol class="numbered">
+                {% for step in safety.while_waiting %}
+                <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        </section>
+
+        <section class="card" aria-labelledby="support-title">
+            <span class="icon-badge">{{ icon("heart") }}</span>
+            <h2 class="card__title support-card__title" id="support-title">Feeling overwhelmed?</h2>
+            <p>
+                Mental health matters as much as physical health. If you are struggling, talking to
+                someone can help. Tele-MANAS offers free, confidential support in many Indian languages,
+                at any time, on <a href="tel:14416"><strong>14416</strong></a> or
+                <a href="tel:18008914416">1-800-891-4416</a>.
+            </p>
+        </section>
+
+        <section class="card" aria-labelledby="tips-title">
+            <h2 class="card__title" id="tips-title">Be prepared</h2>
+            <ul class="check-list">
+                {% for tip in safety.everyday_tips %}
+                <li>{{ icon("check", "icon--sm") }}<span>{{ tip }}</span></li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+
+    <p class="hint">
+        Numbers last checked: {{ safety.last_checked }}. Sources: {{ safety.sources }}
+    </p>
+
+    {% include "partials/_disclaimer.html" %}
+</div>
+{% endblock %}

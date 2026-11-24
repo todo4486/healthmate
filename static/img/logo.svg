@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="HealthMate">
+  <rect width="32" height="32" rx="8" fill="#0f766e"/>
+  <path d="M16 25s-9-5.4-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.6-9 12-9 12z" fill="#ffffff"/>
+  <polyline points="9 15 13 15 15 11.5 17.5 18 19.5 15 23 15" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

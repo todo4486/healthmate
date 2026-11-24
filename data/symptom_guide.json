@@ -1,0 +1,52 @@
+{
+    "warning_signs": [
+        {"id": "chest_pain", "label": "Chest pain, pressure or tightness"},
+        {"id": "breathing", "label": "Struggling to breathe, or can't speak in full sentences"},
+        {"id": "consciousness", "label": "Fainting, collapse, or new confusion or drowsiness"},
+        {"id": "stroke", "label": "Face drooping, weakness in an arm or leg, or slurred speech"},
+        {"id": "bleeding", "label": "Bleeding that won't stop"},
+        {"id": "allergy", "label": "Swelling of the face, lips or throat"},
+        {"id": "seizure", "label": "A seizure (fit)"},
+        {"id": "headache_severe", "label": "A sudden, very severe headache, or headache with a stiff neck"},
+        {"id": "self_harm", "label": "Thoughts of harming yourself or ending your life"}
+    ],
+
+    "symptoms": [
+        {"id": "fever", "label": "Fever"},
+        {"id": "headache", "label": "Headache"},
+        {"id": "cough", "label": "Cough"},
+        {"id": "sore_throat", "label": "Sore throat"},
+        {"id": "runny_nose", "label": "Runny or blocked nose"},
+        {"id": "fatigue", "label": "Tiredness"},
+        {"id": "body_pain", "label": "Body pain"},
+        {"id": "nausea", "label": "Nausea"},
+        {"id": "vomiting", "label": "Vomiting"},
+        {"id": "diarrhoea", "label": "Diarrhoea"},
+        {"id": "stomach_pain", "label": "Stomach pain"},
+        {"id": "dizziness", "label": "Dizziness"},
+        {"id": "rash", "label": "Rash"},
+        {"id": "chest_discomfort", "label": "Chest discomfort"},
+        {"id": "breathing_difficulty", "label": "Breathing difficulties"},
+        {"id": "other", "label": "Other symptoms"}
+    ],
+
+    "durations": [
+        {"id": "under_1_day", "label": "Less than a day"},
+        {"id": "1_3_days", "label": "1 to 3 days"},
+        {"id": "4_7_days", "label": "4 to 7 days"},
+        {"id": "over_1_week", "label": "More than a week"}
+    ],
+
+    "severities": [
+        {"id": "mild", "label": "Mild", "hint": "Noticeable, but I can do my usual activities"},
+        {"id": "moderate", "label": "Moderate", "hint": "It is affecting my day"},
+        {"id": "severe", "label": "Severe", "hint": "I can't do my usual activities"}
+    ],
+
+    "age_groups": [
+        {"id": "under_5", "label": "Under 5"},
+        {"id": "5_17", "label": "5 to 17"},
+        {"id": "18_64", "label": "18 to 64"},
+        {"id": "65_plus", "label": "65 or over"}
+    ]
+}

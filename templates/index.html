@@ -1,13 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site_name }}</title>
-</head>
-<body>
-    <!-- Temporary Phase 0 page. Replaced by the real layout in Phase 1. -->
-    <h1>{{ site_name }}</h1>
-    <p>Project foundation is running. The design and pages arrive in Phase 1.</p>
-</body>
-</html>
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+
+{% block title %}{{ site_name }}: take care of your health, one day at a time{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero__grid">
+        <div>
+            <span class="eyebrow">Your everyday wellness companion</span>
+            <h1>Take care of your health, one day at a time.</h1>
+            <p class="hero__lead">
+                HealthMate helps you build healthier habits, explore general symptom guidance
+                and access helpful wellness information in one simple place.
+            </p>
+            <div class="cluster">
+                <a class="btn btn--primary btn--lg" href="{{ url_for('pages.register') }}">
+                    Get started free {{ icon("arrow-right") }}
+                </a>
+                <a class="btn btn--secondary btn--lg" href="{{ url_for('pages.symptoms') }}">
+                    Check symptoms
+                </a>
+            </div>
+            <p class="hero__note">
+                {{ icon("info", "icon--sm") }} General information only. HealthMate does not diagnose.
+            </p>
+        </div>
+
+        {# Decorative example of the habit tracker. Hidden from screen readers. #}
+        <div class="preview" aria-hidden="true">
+            <div class="card card--raised">
+                <p class="preview__label">Example · Today's habits</p>
+                <div class="card__header">
+                    <p class="preview__title">3 of 4 done</p>
+                    <span class="tag tag--ok">{{ icon("check", "icon--sm") }} On track</span>
+                </div>
+                <div class="progress"><div class="progress__bar preview__bar"></div></div>
+                <ul class="preview__habits">
+                    {% for habit in ["Drink 8 glasses of water", "30-minute walk", "Fruit with lunch"] %}
+                    <li>
+                        <span class="preview__tick preview__tick--done">{{ icon("check") }}</span>
+                        {{ habit }}
+                    </li>
+                    {% endfor %}
+                    <li><span class="preview__tick"></span> <span class="muted">Lights out by 11 pm</span></li>
+                </ul>
+            </div>
+            <div class="banner banner--ok">
+                {{ icon("check-square") }}
+                <p><strong>Self-care is likely enough.</strong> Rest, drink fluids and check again tomorrow.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="features-title">
+    <div class="container">
+        <div class="section-header section-header--center">
+            <span class="eyebrow">What you can do</span>
+            <h2 id="features-title">Everything in one calm, simple place</h2>
+            <p>Six focused tools to help you understand your health and build better routines.</p>
+        </div>
+
+        <div class="grid grid--3">
+            {% set features = [
+                ("pages.symptoms", "pulse", "Symptom Guide",
+                 "Select how you feel and see whether self-care, a doctor or urgent care is right."),
+                ("pages.assistant", "chat", "Wellness Assistant",
+                 "Ask everyday questions about sleep, hydration, food, activity and stress."),
+                ("pages.learn", "book", "Health Library",
+                 "Short, easy articles on the habits that make the biggest difference."),
+                ("pages.habits", "check-square", "Habit Tracker",
+                 "Create healthy habits and tick them off each day."),
+                ("pages.dashboard", "chart", "Dashboard",
+                 "See today's progress, your weekly summary and your streak."),
+                ("pages.safety", "alert", "Safety Center",
+                 "Know the warning signs and who to call in an emergency."),
+            ] %}
+            {% for endpoint, icon_name, title, text in features %}
+            <article class="card feature-card">
+                <span class="icon-badge{% if endpoint == 'pages.safety' %} icon-badge--danger{% endif %}">
+                    {{ icon(icon_name) }}
+                </span>
+                <h3>{{ title }}</h3>
+                <p>{{ text }}</p>
+                <a class="card__link" href="{{ url_for(endpoint) }}">
+                    Open {{ title }} {{ icon("arrow-right", "icon--sm icon-arrow") }}
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section--white" aria-labelledby="how-title">
+    <div class="container">
+        <div class="section-header">
+            <span class="eyebrow">How it works</span>
+            <h2 id="how-title">Three simple steps</h2>
+        </div>
+        <ol class="steps grid grid--3">
+            <li class="step">
+                <h3>Create your free account</h3>
+                <p>Sign up with your email or Google account. Your data stays private to you.</p>
+            </li>
+            <li class="step">
+                <h3>Build daily habits</h3>
+                <p>Choose a few small, healthy habits and tick them off each day.</p>
+            </li>
+            <li class="step">
+                <h3>Get guidance when you need it</h3>
+                <p>
+                    Check symptoms, ask the assistant or read the library, with clear advice on when to
+                    see a professional.
+                </p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="benefits-title">
+    <div class="container">
+        <div class="section-header">
+            <span class="eyebrow">Why HealthMate</span>
+            <h2 id="benefits-title">Small steps, real benefits</h2>
+            <p>Good health is built from everyday choices. HealthMate makes them easier to keep.</p>
+        </div>
+        <div class="grid grid--2">
+            {% set benefits = [
+                ("check-square", "Build lasting routines",
+                 "Tracking small daily actions helps them become habits you keep."),
+                ("alert", "Know when to seek care",
+                 "Clear guidance helps you decide between self-care, a doctor or urgent help."),
+                ("book", "Learn the basics that matter",
+                 "Plain-language advice on sleep, hydration, nutrition, activity and stress."),
+                ("shield", "Private by design",
+                 "Only you can see your habits and saved checks. We collect the minimum we need."),
+            ] %}
+            {% for icon_name, title, text in benefits %}
+            <div class="benefit">
+                <span class="icon-badge">{{ icon(icon_name) }}</span>
+                <div>
+                    <h3>{{ title }}</h3>
+                    <p>{{ text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section--top-only">
+    <div class="container">
+        <div class="callout">
+            <div>
+                <h2>Is this an emergency?</h2>
+                <p>
+                    Do not use HealthMate. Call <strong>112</strong> straight away, or
+                    <strong>108</strong> for an ambulance.
+                </p>
+            </div>
+            <a class="btn btn--danger btn--lg" href="{{ url_for('pages.safety') }}">
+                {{ icon("phone") }} Safety Center
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="page-end">
+    <div class="container">
+        {% include "partials/_disclaimer.html" %}
+    </div>
+</section>
+{% endblock %}

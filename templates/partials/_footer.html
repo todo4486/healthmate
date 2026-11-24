@@ -1,0 +1,40 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__brand">
+                <a class="brand" href="{{ url_for('pages.home') }}">
+                    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" width="32" height="32">
+                    <span>{{ site_name }}</span>
+                </a>
+                <p>
+                    Simple, trustworthy wellness guidance. General educational information only, not a
+                    medical diagnosis.
+                </p>
+            </div>
+
+            <div>
+                <p class="footer__heading">Explore</p>
+                <ul class="footer__links">
+                    {% for item in nav_items %}
+                    <li><a href="{{ url_for(item.endpoint) }}">{{ item.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div>
+                <p class="footer__heading">Safety</p>
+                <ul class="footer__links">
+                    <li><a href="{{ url_for('pages.safety') }}">Safety Center</a></li>
+                    {% for item in safety.numbers if item.urgent %}
+                    <li><a href="tel:{{ item.number }}">Call {{ item.number }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <p>&copy; {{ current_year }} {{ site_name }} · A college project</p>
+            <p>Not a substitute for professional medical advice.</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,12 @@
+{% from "partials/_icons.html" import icon %}
+{# One habit card. Copied by habit-view.js for each habit. #}
+<template id="habit-template">
+    <li class="card habit">
+        <button class="habit__check" type="button" aria-pressed="false">{{ icon("check") }}</button>
+        <div class="habit__body">
+            <p class="habit__name"></p>
+            <span class="tag"><span class="dot"></span><span class="habit__category"></span></span>
+        </div>
+        <button class="btn btn--ghost btn--icon" type="button" data-habit-delete>{{ icon("trash") }}</button>
+    </li>
+</template>

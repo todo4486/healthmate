@@ -1,0 +1,15 @@
+# Render "Blueprint": describes how to run HealthMate on render.com.
+# Render reads this file when you create the service from this repository.
+services:
+  - type: web
+    name: healthmate
+    runtime: python
+    plan: free                                 # change to "starter" to avoid sleeping
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app             # settings in gunicorn.conf.py
+    healthCheckPath: /healthz
+    autoDeploy: true                           # redeploy on every push to main
+    envVars:
+      - key: APP_ENV
+        value: production
+# The Python version comes from the .python-version file (3.11).

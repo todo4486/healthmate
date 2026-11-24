@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+{% from "partials/_ui.html" import page_header %}
+
+{% block title %}Symptom Guide · {{ site_name }}{% endblock %}
+
+{% macro chips(name, items, type="radio") -%}
+<div class="chip-group">
+    {% for item in items %}
+    <label class="chip">
+        <input type="{{ type }}" name="{{ name }}" value="{{ item.id }}">
+        <span>{{ item.label }}</span>
+    </label>
+    {% endfor %}
+</div>
+{%- endmacro %}
+
+{% block content %}
+{{ page_header("Symptom Guide", "How are you feeling?",
+               "Answer a few questions to get general guidance on where to get help. "
+               ~ "This is not a diagnosis and cannot replace a healthcare professional.") }}
+
+<div class="container page-body with-sidebar">
+    <div class="stack">
+        <section class="card">
+            <form class="form" id="symptom-form" novalidate>
+                <div class="banner banner--warn form-message" data-form-message role="alert"></div>
+
+                {# ---------- Step 1: warning signs (asked first, for safety) ---------- #}
+                <fieldset class="fieldset form-step form-step--warning" aria-describedby="warning_signs-error">
+                    <legend class="legend"><span class="step__number">1</span> Do you have any of these right now?</legend>
+                    <div class="warning-box">
+                    <p class="hint">These can be signs of an emergency. Tick any that apply.</p>
+                    <div class="checkbox-list">
+                        {% for item in guide.warning_signs %}
+                        <label class="checkbox">
+                            <input type="checkbox" name="warning_signs" value="{{ item.id }}">
+                            <span>{{ item.label }}</span>
+                        </label>
+                        {% endfor %}
+                        <label class="checkbox checkbox--none">
+                            <input type="checkbox" name="no_warning_signs" value="yes">
+                            <span><strong>None of these</strong></span>
+                        </label>
+                    </div>
+                    </div>
+                    <p class="field-error" id="warning_signs-error"></p>
+                </fieldset>
+
+                {# ---------- Step 2: common symptoms ---------- #}
+                <fieldset class="fieldset form-step" aria-describedby="symptoms-error">
+                    <legend class="legend"><span class="step__number">2</span> Which symptoms do you have?</legend>
+                    {{ chips("symptoms", guide.symptoms, "checkbox") }}
+                    <p class="field-error" id="symptoms-error"></p>
+                </fieldset>
+
+                {# ---------- Step 3: description ---------- #}
+                <div class="field form-step">
+                    <label class="legend" for="details">
+                        <span class="step__number">3</span> Describe anything else
+                        <span class="optional">(optional)</span>
+                    </label>
+                    <textarea class="textarea" id="details" name="details" maxlength="500"
+                              aria-describedby="details-hint details-error"
+                              placeholder="e.g. It started after lunch and gets worse when I stand up"></textarea>
+                    <p class="hint" id="details-hint">
+                        Up to 500 characters. Don't include your name or contact details.
+                        This description is never saved.
+                    </p>
+                    <p class="field-error" id="details-error"></p>
+                </div>
+
+                {# ---------- Step 4: duration ---------- #}
+                <fieldset class="fieldset form-step" aria-describedby="duration-error">
+                    <legend class="legend"><span class="step__number">4</span> How long have you had them?</legend>
+                    {{ chips("duration", guide.durations) }}
+                    <p class="field-error" id="duration-error"></p>
+                </fieldset>
+
+                {# ---------- Step 5: severity ---------- #}
+                <fieldset class="fieldset form-step" aria-describedby="severity-hint severity-error">
+                    <legend class="legend"><span class="step__number">5</span> How severe are they?</legend>
+                    {{ chips("severity", guide.severities) }}
+                    <ul class="hint severity-hints" id="severity-hint">
+                        {% for item in guide.severities %}
+                        <li><strong>{{ item.label }}:</strong> {{ item.hint }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p class="field-error" id="severity-error"></p>
+                </fieldset>
+
+                {# ---------- Step 6: age group ---------- #}
+                <fieldset class="fieldset form-step" aria-describedby="age_group-error">
+                    <legend class="legend"><span class="step__number">6</span> Age of the person with symptoms</legend>
+                    {{ chips("age_group", guide.age_groups) }}
+                    <p class="field-error" id="age_group-error"></p>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button class="btn btn--primary btn--lg" type="submit">Get guidance</button>
+                    <button class="btn btn--ghost btn--lg" type="reset">Clear answers</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="symptom-result" class="result" tabindex="-1" aria-live="polite" hidden></section>
+    </div>
+
+    <aside class="stack">
+        <div class="banner banner--danger">
+            {{ icon("alert") }}
+            <p>
+                <strong>Emergency?</strong> Don't fill in this form.
+                Call <a href="tel:112">112</a>, or <a href="tel:108">108</a> for an ambulance.
+            </p>
+        </div>
+
+        <section class="card" aria-labelledby="levels-title">
+            <h2 class="card__title" id="levels-title">What the results mean</h2>
+            <ul class="level-list">
+                <li><span class="tag tag--danger">Urgent care</span>Get medical help now: call 112 or go to an emergency department.</li>
+                <li><span class="tag tag--warn">See a doctor</span>Get advice from a doctor today or in the next day or two.</li>
+                <li><span class="tag tag--ok">Self-care</span>Rest and home care may be enough, while you watch for changes.</li>
+            </ul>
+        </section>
+
+        <section class="card" aria-labelledby="about-title">
+            <h2 class="card__title" id="about-title">How this guide works</h2>
+            <p class="text-sm muted">
+                It uses a short list of written rules, not artificial intelligence. It always shows which of
+                your answers led to the result. It can't examine you, doesn't know your medical history and
+                can be wrong, so when in doubt it suggests getting help.
+            </p>
+        </section>
+    </aside>
+</div>
+
+{# ---------- Result, filled in by symptoms.js ---------- #}
+<template id="result-template">
+    <div class="card result__card">
+        <div class="banner result__level" data-level-banner>
+            <span data-level-icon></span>
+            <div>
+                <h2 data-heading></h2>
+                <p data-summary></p>
+            </div>
+        </div>
+
+        <div class="banner banner--danger" data-text-alert hidden>
+            {{ icon("alert") }}
+            <p data-text-alert-text></p>
+        </div>
+
+        <div class="banner banner--info" data-crisis hidden>
+            {{ icon("heart") }}
+            <p>
+                <strong>Support is available now.</strong> Call Tele-MANAS on
+                <a href="tel:14416">14416</a> (free, 24/7), or <a href="tel:112">112</a> if you are in danger.
+            </p>
+        </div>
+
+        <div class="result__grid">
+            <section>
+                <h3>What to do next</h3>
+                <ol class="numbered" data-next-steps></ol>
+            </section>
+            <section>
+                <h3>Why you got this result</h3>
+                <ul class="check-list" data-reasons></ul>
+            </section>
+            <section>
+                <h3>Get help sooner if you notice</h3>
+                <ul class="bullet-list" data-watch-for></ul>
+            </section>
+            <section>
+                <h3>What you told us</h3>
+                <dl class="summary-list" data-submitted></dl>
+            </section>
+        </div>
+
+        <p class="disclaimer-text" data-disclaimer></p>
+
+        <div class="result__save" data-save-area>
+            <p class="hint" data-save-note>
+                <strong>Save to your history?</strong> Only the options you ticked (symptoms, how long, how
+                severe, age group) and the result are saved to your private account. Your description and
+                warning-sign answers are never saved. You can delete saved checks from your dashboard.
+            </p>
+            <div class="cluster">
+                <button class="btn btn--secondary" type="button" data-save-check data-auth-show="user">
+                    Save to my history
+                </button>
+                <a class="btn btn--secondary" href="{{ url_for('pages.login', next='/symptoms') }}"
+                   data-auth-show="guest">Log in to save results</a>
+                <button class="btn btn--ghost" type="button" data-start-again>Start again</button>
+            </div>
+            <p class="form-message" data-save-message role="status"></p>
+        </div>
+    </div>
+</template>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/symptoms.js') }}"></script>
+{% endblock %}

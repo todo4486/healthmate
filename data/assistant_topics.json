@@ -1,0 +1,107 @@
+{
+    "_about": "Pre-written answers for the Wellness Assistant. Each topic is picked by counting how many of its keywords appear in the question. To add a topic, add an entry here. No code change is needed.",
+
+    "topics": [
+        {
+            "id": "sleep",
+            "title": "Sleep",
+            "keywords": ["sleep", "sleeping", "slept", "insomnia", "tired", "sleepy", "bedtime", "bed", "nap",
+                         "naps", "awake", "wake", "waking", "rest", "restless", "night"],
+            "answer": [
+                "Most adults need at least 7 hours of sleep a night. A regular routine is one of the most helpful things you can build.",
+                "Try going to bed and waking up at about the same time every day, including weekends, and give yourself 30 to 60 minutes to wind down without screens."
+            ],
+            "tips": [
+                "Avoid caffeine in the afternoon and evening.",
+                "Keep your bedroom dark, quiet and cool.",
+                "Get some daylight and movement during the day.",
+                "If you can't sleep, get up and do something calm until you feel sleepy."
+            ],
+            "see_doctor": "If poor sleep lasts for weeks, or you feel very tired during the day, speak to a doctor.",
+            "link": {"url": "/learn/sleep-basics", "label": "Read: Getting better sleep"}
+        },
+        {
+            "id": "stress",
+            "title": "Stress and mental wellness",
+            "keywords": ["stress", "stressed", "stressful", "anxious", "anxiety", "worry", "worried", "worrying",
+                         "overwhelmed", "calm", "relax", "relaxing", "mental", "mood", "nervous", "pressure",
+                         "exam", "exams", "burnout", "sad", "lonely"],
+            "answer": [
+                "Some stress is a normal part of life, but long-term stress can affect your sleep, mood and health. Small, regular habits can help you feel more in control.",
+                "A simple breathing exercise can help in the moment: breathe in slowly for 4 seconds and out for 6 seconds, for a few minutes."
+            ],
+            "tips": [
+                "Take short breaks, and spend time outdoors when you can.",
+                "Talk to someone you trust about how you feel.",
+                "Keep a regular routine for sleep, meals and activity.",
+                "Limit news and social media if they make you feel worse."
+            ],
+            "see_doctor": "If stress or low mood feels overwhelming or lasts more than two weeks, speak to a doctor or call Tele-MANAS on 14416 (free, 24/7).",
+            "link": {"url": "/learn/managing-stress", "label": "Read: Managing stress"}
+        },
+        {
+            "id": "activity",
+            "title": "Physical activity",
+            "keywords": ["exercise", "exercising", "active", "activity", "walk", "walking", "run", "running",
+                         "gym", "workout", "fitness", "fit", "sport", "sports", "yoga", "steps", "move",
+                         "moving", "sitting", "sedentary", "stretch", "stretching", "physically"],
+            "answer": [
+                "The World Health Organization recommends that adults get 150 to 300 minutes of moderate activity a week, such as brisk walking, plus muscle-strengthening activities on 2 or more days.",
+                "You don't have to do it all at once. Short bursts add up, and any activity is better than none."
+            ],
+            "tips": [
+                "Start with a 10-minute walk and build up gradually.",
+                "Choose activities you enjoy, so you keep doing them.",
+                "Break up long periods of sitting every 30 to 60 minutes.",
+                "Take the stairs or walk for short journeys when you can."
+            ],
+            "see_doctor": "If you have a health condition, or haven't been active for a long time, check with a doctor before starting something strenuous.",
+            "link": {"url": "/learn/moving-more", "label": "Read: Moving more every day"}
+        },
+        {
+            "id": "nutrition",
+            "title": "Healthy eating",
+            "keywords": ["eat", "eating", "food", "foods", "diet", "nutrition", "healthy", "meal", "meals",
+                         "breakfast", "lunch", "dinner", "snack", "snacks", "vegetables", "fruit", "fruits",
+                         "sugar", "salt", "protein", "weight", "junk"],
+            "answer": [
+                "A balanced diet gives your body the energy and nutrients it needs. A simple guide is to fill half your plate with vegetables and fruit, a quarter with whole grains and a quarter with protein.",
+                "Small, steady changes are easier to keep than strict diets."
+            ],
+            "tips": [
+                "Choose whole grains such as brown rice, whole-wheat roti or oats.",
+                "Include protein such as dal, beans, eggs, fish, paneer or lean meat.",
+                "Cut down on added sugar, salt and highly processed foods.",
+                "Eat regular meals instead of skipping and overeating later."
+            ],
+            "see_doctor": "For advice on a medical condition, food allergies or losing or gaining weight, speak to a doctor or a registered dietitian.",
+            "link": {"url": "/learn/balanced-diet", "label": "Read: Eating a balanced diet"}
+        },
+        {
+            "id": "hydration",
+            "title": "Hydration",
+            "keywords": ["water", "hydration", "hydrate", "hydrated", "dehydrated", "dehydration", "drink",
+                         "drinking", "drinks", "thirsty", "thirst", "fluids", "fluid", "glasses", "litres",
+                         "liters", "heat", "hot"],
+            "answer": [
+                "Your body needs water to control its temperature, digest food and stay alert. How much you need depends on your size, how active you are and the weather.",
+                "A simple sign that you're drinking enough is pale yellow urine. You need more when it's hot, when you exercise, or if you have a fever."
+            ],
+            "tips": [
+                "Keep a water bottle with you through the day.",
+                "Drink regularly instead of waiting until you feel very thirsty.",
+                "Choose water over sugary drinks most of the time.",
+                "Fruit, soups and buttermilk also count towards your fluids."
+            ],
+            "see_doctor": "If you have a heart or kidney condition, ask a doctor how much fluid is right for you.",
+            "link": {"url": "/learn/staying-hydrated", "label": "Read: Staying hydrated"}
+        }
+    ],
+
+    "greetings": ["hi", "hello", "hey", "namaste", "thanks", "thank", "good morning", "good evening"],
+
+    "medical_words": ["medicine", "medicines", "medication", "medications", "tablet", "tablets", "pill",
+                      "pills", "dose", "dosage", "antibiotic", "antibiotics", "prescription", "prescribe",
+                      "paracetamol", "ibuprofen", "diagnose", "diagnosis", "do i have", "is it cancer",
+                      "treatment", "treat", "cure", "infection", "disease"]
+}

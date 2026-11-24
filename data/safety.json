@@ -1,0 +1,69 @@
+{
+    "region": "India",
+    "last_checked": "November 2026",
+    "sources": "112: Ministry of Home Affairs (Emergency Response Support System, 112.gov.in). 108: National Health Mission ambulance service, run by each state. Tele-MANAS: Ministry of Health and Family Welfare.",
+
+    "numbers": [
+        {
+            "number": "112",
+            "label": "All emergencies: police, fire and ambulance. Works across India.",
+            "urgent": true
+        },
+        {
+            "number": "108",
+            "label": "Emergency ambulance, available in most states.",
+            "urgent": true
+        },
+        {
+            "number": "14416",
+            "label": "Tele-MANAS: free, confidential mental health support, 24/7. Also 1-800-891-4416.",
+            "urgent": false
+        }
+    ],
+    "numbers_note": "These numbers are for India. If you are in another country, use your local emergency number. If 108 doesn't connect in your area, call 112.",
+
+    "warning_signs": [
+        {"title": "Chest pain or pressure",
+         "detail": "Pain, tightness or pressure in the chest, especially if it spreads to the arm, jaw or back, or comes with sweating or breathlessness."},
+        {"title": "Difficulty breathing",
+         "detail": "Struggling to breathe, not able to speak in full sentences, or lips turning blue or grey."},
+        {"title": "Signs of a stroke",
+         "detail": "Face drooping on one side, weakness in an arm or leg, or slurred or confused speech that starts suddenly."},
+        {"title": "Fainting or unresponsiveness",
+         "detail": "Losing consciousness, not waking up properly, or sudden confusion."},
+        {"title": "Seizure",
+         "detail": "A fit or seizure, especially a first one or one lasting more than five minutes."},
+        {"title": "Severe bleeding",
+         "detail": "Bleeding that doesn't stop with firm pressure, or a serious injury."},
+        {"title": "Severe allergic reaction",
+         "detail": "Swelling of the face, lips or throat, difficulty swallowing, or a rash with breathlessness."},
+        {"title": "Sudden severe headache",
+         "detail": "The worst headache of your life, or a headache with a stiff neck, high fever or rash."},
+        {"title": "Risk of self-harm",
+         "detail": "If you or someone else may be at risk of self-harm, get help immediately. You are not alone."}
+    ],
+
+    "see_doctor_soon": [
+        "A high fever that doesn't come down, or any fever in a baby under 3 months.",
+        "Vomiting or diarrhoea where you can't keep fluids down, or you're passing very little urine.",
+        "Symptoms that are getting worse, or haven't improved after a few days.",
+        "A new pain, lump or change in your body that worries you.",
+        "Feeling unwell if you are pregnant, older, or have a long-term health condition."
+    ],
+
+    "while_waiting": [
+        "Call 112 (or 108 for an ambulance). Say what is happening and exactly where you are.",
+        "Stay with the person and keep them as calm and comfortable as you can.",
+        "Don't drive yourself to hospital if you have severe symptoms.",
+        "Unlock the door and, if possible, ask someone to meet the ambulance.",
+        "Keep a list of the person's medicines and allergies ready for the medical team."
+    ],
+
+    "everyday_tips": [
+        "Save 112 and 108 in your phone, and teach children when to use them.",
+        "Know where your nearest hospital with an emergency department is.",
+        "Keep a written list of your medicines, allergies and health conditions in your wallet or phone.",
+        "Keep a basic first-aid kit at home, and check it every few months.",
+        "Store medicines, cleaning products and chemicals out of children's reach."
+    ]
+}

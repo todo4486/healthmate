@@ -1,0 +1,243 @@
+{
+    "categories": [
+        {"id": "sleep", "title": "Sleep", "icon": "clock",
+         "description": "How much sleep you need and how to sleep better."},
+        {"id": "nutrition", "title": "Nutrition", "icon": "heart",
+         "description": "Simple, balanced eating that fits everyday life."},
+        {"id": "activity", "title": "Physical activity", "icon": "pulse",
+         "description": "Moving more and sitting less, at any fitness level."},
+        {"id": "hydration", "title": "Hydration", "icon": "check-square",
+         "description": "Drinking enough, and staying safe in hot weather."},
+        {"id": "mental", "title": "Mental wellness", "icon": "chat",
+         "description": "Managing stress and looking after your mind."},
+        {"id": "prevention", "title": "Preventive health", "icon": "shield",
+         "description": "Everyday habits and check-ups that prevent problems."}
+    ],
+
+    "articles": [
+        {
+            "id": "sleep-basics",
+            "category": "sleep",
+            "title": "Getting better sleep",
+            "summary": "Most adults need at least 7 hours of sleep a night. Regular, good-quality sleep supports mood, concentration and the immune system.",
+            "minutes": 3,
+            "sections": [
+                {"heading": "How much sleep do you need?",
+                 "text": "Most adults need at least 7 hours a night. Teenagers usually need 8 to 10 hours, and children need more. Feeling rested during the day is a good sign you're getting enough."},
+                {"heading": "Habits that help",
+                 "tips": ["Go to bed and wake up at about the same time every day, including weekends.",
+                          "Avoid caffeine (tea, coffee, cola, energy drinks) in the afternoon and evening.",
+                          "Get daylight and some movement during the day.",
+                          "Keep your bedroom dark, quiet and cool."]},
+                {"heading": "When to get advice",
+                 "text": "Speak to a doctor if poor sleep lasts for several weeks, if you feel very sleepy during the day, or if someone notices you stop breathing or snore loudly while you sleep."}
+            ]
+        },
+        {
+            "id": "wind-down",
+            "category": "sleep",
+            "title": "Building a wind-down routine",
+            "summary": "A calm routine in the hour before bed tells your body it's time to sleep. It's one of the simplest changes you can make.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "Why it works",
+                 "text": "Doing the same relaxing things each night helps your body learn when to get ready for sleep. Bright screens and busy activities late at night can make it harder to fall asleep."},
+                {"heading": "Ideas for your routine",
+                 "tips": ["Put your phone and laptop away 30 to 60 minutes before bed.",
+                          "Dim the lights and do something calm: read, stretch gently or listen to quiet music.",
+                          "Write down tomorrow's tasks so they're off your mind.",
+                          "If you can't sleep after about 20 minutes, get up and do something calm until you feel sleepy."]}
+            ]
+        },
+        {
+            "id": "balanced-diet",
+            "category": "nutrition",
+            "title": "Eating a balanced diet",
+            "summary": "A varied diet gives your body the energy and nutrients it needs. Small, steady changes are easier to keep than strict diets.",
+            "minutes": 3,
+            "sections": [
+                {"heading": "A simple plate guide",
+                 "text": "Try filling half your plate with vegetables and fruit, a quarter with whole grains and a quarter with protein."},
+                {"heading": "Everyday tips",
+                 "tips": ["Choose whole grains such as brown rice, whole-wheat roti, millets or oats.",
+                          "Include protein such as dal, beans, eggs, fish, paneer or lean meat.",
+                          "Eat a variety of colourful vegetables and fruits.",
+                          "Eat regular meals instead of skipping and overeating later."]},
+                {"heading": "Getting personal advice",
+                 "text": "If you have a health condition, food allergies, or want to lose or gain weight, a doctor or registered dietitian can give advice that is right for you."}
+            ]
+        },
+        {
+            "id": "sugar-and-salt",
+            "category": "nutrition",
+            "title": "Cutting down on sugar and salt",
+            "summary": "Too much added sugar and salt can raise the risk of health problems over time. A few swaps make a real difference.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "What the guidelines say",
+                 "text": "The World Health Organization recommends adults eat less than 5 grams of salt a day (about one teaspoon) and keep added sugars to less than 10% of daily energy, ideally less than 5%."},
+                {"heading": "Easy swaps",
+                 "tips": ["Drink water, buttermilk or plain tea instead of sugary drinks.",
+                          "Taste food before adding salt, and use herbs, spices and lemon for flavour.",
+                          "Eat fewer packaged snacks, pickles and instant foods, which are often high in salt.",
+                          "Have fruit instead of sweets for dessert most days."]}
+            ]
+        },
+        {
+            "id": "moving-more",
+            "category": "activity",
+            "title": "Moving more every day",
+            "summary": "The World Health Organization recommends adults get 150 to 300 minutes of moderate activity each week, plus muscle-strengthening on 2 or more days.",
+            "minutes": 3,
+            "sections": [
+                {"heading": "What counts as moderate activity?",
+                 "text": "Anything that makes you breathe faster and feel warmer while you can still talk, such as brisk walking, cycling, dancing or swimming."},
+                {"heading": "Getting started",
+                 "tips": ["Start small: a 10-minute walk is a good beginning.",
+                          "Short bursts add up over the day.",
+                          "Choose activities you enjoy so you keep doing them.",
+                          "Add strength exercises, like climbing stairs or bodyweight squats, twice a week."]},
+                {"heading": "Be safe",
+                 "text": "If you have a health condition or haven't been active for a long time, check with a doctor before starting something strenuous. Stop and get help if you feel chest pain, faintness or severe breathlessness."}
+            ]
+        },
+        {
+            "id": "sitting-less",
+            "category": "activity",
+            "title": "Sitting less and healthy screen habits",
+            "summary": "Long hours of sitting at a desk or screen can strain your eyes, neck and back. Regular breaks help.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "Break up sitting",
+                 "text": "Try to stand up, stretch or walk around for a few minutes every 30 to 60 minutes."},
+                {"heading": "At your screen",
+                 "tips": ["Follow the 20-20-20 rule: every 20 minutes, look at something about 20 feet away for 20 seconds.",
+                          "Keep the top of your screen at or slightly below eye level.",
+                          "Sit with your back supported and feet flat on the floor.",
+                          "Take phone calls standing or walking when you can."]}
+            ]
+        },
+        {
+            "id": "staying-hydrated",
+            "category": "hydration",
+            "title": "Staying hydrated",
+            "summary": "Your body needs water to control its temperature, digest food and stay alert. You need more in hot weather and when you're active.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "How much should you drink?",
+                 "text": "It depends on your size, how active you are and the weather. A simple guide is pale yellow urine: darker urine can mean you need to drink more."},
+                {"heading": "Tips",
+                 "tips": ["Keep a water bottle with you through the day.",
+                          "Drink regularly instead of waiting until you feel very thirsty.",
+                          "Drink more when it's hot, when you exercise or if you have a fever.",
+                          "Choose water over sugary drinks most of the time."]},
+                {"heading": "Special cases",
+                 "text": "If you have a heart or kidney condition, ask a doctor how much fluid is right for you."}
+            ]
+        },
+        {
+            "id": "hot-weather",
+            "category": "hydration",
+            "title": "Staying safe in hot weather",
+            "summary": "Heat can make anyone unwell, especially older adults, young children and people who work outdoors.",
+            "minutes": 3,
+            "sections": [
+                {"heading": "Before it gets hot",
+                 "tips": ["Drink water regularly, even if you don't feel thirsty.",
+                          "Avoid going out or exercising in the hottest part of the day, usually around noon to 4 pm.",
+                          "Wear loose, light-coloured cotton clothes and cover your head.",
+                          "Check on older relatives and neighbours."]},
+                {"heading": "Signs of heat exhaustion",
+                 "text": "Heavy sweating, headache, dizziness, feeling sick and feeling very tired. Move somewhere cool, rest and drink water."},
+                {"heading": "When it's an emergency",
+                 "text": "Confusion, fainting, a seizure, or hot skin with no sweating can be signs of heatstroke. Call 112 straight away."}
+            ]
+        },
+        {
+            "id": "managing-stress",
+            "category": "mental",
+            "title": "Managing stress",
+            "summary": "Some stress is normal, but long-term stress can affect sleep, mood and physical health. Simple habits can help you feel more in control.",
+            "minutes": 3,
+            "sections": [
+                {"heading": "Try this now",
+                 "text": "Slow breathing can help in the moment: breathe in for 4 seconds and out for 6 seconds, for a few minutes."},
+                {"heading": "Everyday habits",
+                 "tips": ["Take short breaks, and spend time outdoors when you can.",
+                          "Keep a regular routine for sleep, meals and activity.",
+                          "Break big tasks into small steps.",
+                          "Limit news and social media if they make you feel worse."]},
+                {"heading": "Getting support",
+                 "text": "If stress feels overwhelming or lasts for weeks, speak to a doctor, or call Tele-MANAS on 14416 for free, confidential support at any time."}
+            ]
+        },
+        {
+            "id": "mental-wellbeing",
+            "category": "mental",
+            "title": "Looking after your mental wellbeing",
+            "summary": "Mental wellbeing is about feeling good and coping with everyday life. Like physical health, it benefits from regular care.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "Five everyday habits",
+                 "tips": ["Connect with people: call a friend or spend time with family.",
+                          "Be active: movement can lift your mood.",
+                          "Keep learning: try a new hobby or skill.",
+                          "Help others: small acts of kindness can make you feel good too.",
+                          "Notice the present moment, for example on a short walk."]},
+                {"heading": "It's okay to ask for help",
+                 "text": "If you feel low, anxious or not like yourself for more than two weeks, talk to a doctor or someone you trust. If you have thoughts of harming yourself, call 14416 or 112 now."}
+            ]
+        },
+        {
+            "id": "hand-hygiene",
+            "category": "prevention",
+            "title": "Hand hygiene",
+            "summary": "Washing your hands is one of the simplest ways to stop infections spreading to you and others.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "How to wash your hands",
+                 "text": "Use soap and clean water and scrub all parts of your hands for at least 20 seconds, then rinse and dry."},
+                {"heading": "When to wash",
+                 "tips": ["Before eating or preparing food.",
+                          "After using the toilet or changing a nappy.",
+                          "After coughing, sneezing or blowing your nose.",
+                          "After touching animals or rubbish."]},
+                {"heading": "No soap?",
+                 "text": "Use a hand sanitiser with at least 60% alcohol until you can wash your hands."}
+            ]
+        },
+        {
+            "id": "health-checkups",
+            "category": "prevention",
+            "title": "Regular health check-ups",
+            "summary": "Check-ups can find problems early, often before you notice any symptoms, when they're easier to treat.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "Things to keep track of",
+                 "tips": ["Your blood pressure, blood sugar and weight.",
+                          "Your vaccinations, for you and your children.",
+                          "Health conditions that run in your family.",
+                          "Any changes in your body that you're unsure about."]},
+                {"heading": "How often?",
+                 "text": "This depends on your age and health. Ask your doctor how often you should have a general check-up and which screening tests are right for you."}
+            ]
+        },
+        {
+            "id": "when-to-see-a-doctor",
+            "category": "prevention",
+            "title": "When to see a doctor",
+            "summary": "Many common illnesses get better on their own, but some signs mean you should get medical advice.",
+            "minutes": 2,
+            "sections": [
+                {"heading": "Get medical advice if",
+                 "tips": ["Symptoms last longer than a week, or keep coming back.",
+                          "Symptoms are getting worse instead of better.",
+                          "A fever doesn't come down, especially in young children or older adults.",
+                          "You are pregnant, have a long-term condition or a weakened immune system and feel unwell.",
+                          "Anything worries you. It is always fine to ask."]},
+                {"heading": "In an emergency",
+                 "text": "For warning signs such as chest pain, trouble breathing, fainting or signs of a stroke, call 112 straight away. See the Safety Center for more."}
+            ]
+        }
+    ]
+}

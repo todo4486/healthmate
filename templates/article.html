@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+{% from "partials/_ui.html" import article_card %}
+
+{% block title %}{{ article.title }} · Health Library · {{ site_name }}{% endblock %}
+{% block description %}{{ article.summary }}{% endblock %}
+
+{% block content %}
+<article>
+    <header class="page-header">
+        <div class="container container--narrow">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="{{ url_for('pages.learn') }}">Health Library</a>
+                <span aria-hidden="true">/</span>
+                <a href="{{ url_for('pages.learn_category', category_id=category.id) }}">{{ category.title }}</a>
+            </nav>
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.summary }}</p>
+            <p class="article-meta">{{ icon("clock", "icon--sm") }} {{ article.minutes }} minute read</p>
+        </div>
+    </header>
+
+    <div class="container container--narrow page-body prose">
+        {% for section in article.sections %}
+        <section>
+            <h2>{{ section.heading }}</h2>
+            {% if section.text %}<p>{{ section.text }}</p>{% endif %}
+            {% if section.tips %}
+            <ul class="check-list">
+                {% for tip in section.tips %}
+                <li>{{ icon("check", "icon--sm") }}<span>{{ tip }}</span></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </section>
+        {% endfor %}
+
+        {% include "partials/_disclaimer.html" %}
+    </div>
+</article>
+
+{% if related %}
+<section class="container page-body" aria-labelledby="related-title">
+    <h2 class="section-title" id="related-title">More about {{ category.title | lower }}</h2>
+    <div class="grid grid--3">
+        {% for item in related %}
+        {{ article_card(item, category) }}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+{% set page_access = "private" %}
+
+{% block title %}Habit Tracker · {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container page-header__inner">
+        <div>
+            <span class="eyebrow">Habit Tracker</span>
+            <h1>Today's habits</h1>
+            <p>Small, daily actions add up. Tick each habit off when you've done it today.</p>
+        </div>
+        <div class="cluster">
+            <button class="btn btn--primary" type="button" data-open-add>
+                {{ icon("plus") }} Add habit
+            </button>
+        </div>
+    </div>
+</section>
+
+<div class="container page-body stack" data-habits-root>
+    <div class="banner banner--danger" data-habits-error role="alert" hidden>
+        {{ icon("alert") }}
+        <p data-habits-error-text></p>
+    </div>
+
+    {% include "partials/_habit_progress.html" %}
+
+    <section class="card stack stack--sm" aria-labelledby="list-title">
+        <h2 class="card__title" id="list-title">Your habits</h2>
+
+        <p class="loading" data-habits-loading role="status">Loading your habits…</p>
+
+        <ul class="habit-list" data-habit-list aria-live="polite"></ul>
+
+        <div class="empty-state" data-habits-empty hidden>
+            <span class="icon-badge">{{ icon("check-square") }}</span>
+            <h3>No habits yet</h3>
+            <p>Start with one or two small habits you can do every day, like drinking water or a short walk.</p>
+            <button class="btn btn--secondary btn--sm" type="button" data-open-add>Add your first habit</button>
+        </div>
+    </section>
+</div>
+
+{# ---------- Add habit dialog ---------- #}
+<dialog class="dialog" id="add-dialog" aria-labelledby="add-title">
+    <form class="form" id="habit-form" novalidate>
+        <div class="dialog__header">
+            <h2 id="add-title">Add a habit</h2>
+            <button class="btn btn--ghost btn--icon" type="button" data-close-dialog aria-label="Close">
+                {{ icon("close") }}
+            </button>
+        </div>
+
+        <div class="banner banner--warn form-message" data-form-message role="alert"></div>
+
+        <div class="field">
+            <label class="label" for="habit-name">Habit</label>
+            <input class="input" id="habit-name" name="name" maxlength="60" required autocomplete="off"
+                   placeholder="e.g. Drink 8 glasses of water" aria-describedby="name-error">
+            <p class="field-error" id="name-error"></p>
+        </div>
+
+        <div class="field">
+            <label class="label" for="habit-category">Category</label>
+            <select class="select" id="habit-category" name="category">
+                {% for category in habit_categories %}
+                <option value="{{ category.id }}">{{ category.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="field">
+            <p class="label">Ideas</p>
+            <div class="cluster">
+                {% for idea, category in [
+                    ("Drink 8 glasses of water", "hydration"),
+                    ("30-minute walk", "exercise"),
+                    ("Lights out by 11 pm", "sleep"),
+                    ("Fruit with breakfast", "nutrition"),
+                    ("5 minutes of slow breathing", "mental"),
+                ] %}
+                <button class="suggestion" type="button" data-habit-idea="{{ idea }}"
+                        data-habit-idea-category="{{ category }}">{{ idea }}</button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="dialog__actions">
+            <button class="btn btn--ghost" type="button" data-close-dialog>Cancel</button>
+            <button class="btn btn--primary" type="submit">Add habit</button>
+        </div>
+    </form>
+</dialog>
+
+{# ---------- Delete confirmation dialog ---------- #}
+<dialog class="dialog dialog--small" id="delete-dialog" aria-labelledby="delete-title">
+    <div class="stack stack--sm">
+        <h2 id="delete-title">Delete this habit?</h2>
+        <p><strong data-delete-name></strong> and today's tick will be removed. This can't be undone.</p>
+        <div class="banner banner--warn form-message" data-delete-message role="alert"></div>
+        <div class="dialog__actions">
+            <button class="btn btn--ghost" type="button" data-close-dialog>Cancel</button>
+            <button class="btn btn--danger" type="button" data-confirm-delete>Delete habit</button>
+        </div>
+    </div>
+</dialog>
+
+{% include "partials/_habit_template.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/habits.js') }}"></script>
+{% endblock %}

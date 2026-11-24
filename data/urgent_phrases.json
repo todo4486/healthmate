@@ -1,0 +1,23 @@
+{
+    "_about": "Phrases that MIGHT describe an emergency. Used only to ADD caution, never to lower it. Matching is on whole words, so it cannot understand meaning: 'no chest pain' still matches 'chest pain'. That is a deliberate, safe-side false alarm.",
+
+    "emergency": [
+        "chest pain", "chest pressure", "chest tightness", "tight chest", "crushing",
+        "can't breathe", "cant breathe", "cannot breathe", "can not breathe",
+        "difficulty breathing", "trouble breathing", "struggling to breathe", "gasping",
+        "short of breath", "shortness of breath", "breathless",
+        "fainted", "fainting", "passed out", "collapsed", "unconscious", "unresponsive",
+        "seizure", "convulsion", "convulsions",
+        "stroke", "face drooping", "slurred speech", "can't move my arm", "numb on one side",
+        "bleeding heavily", "heavy bleeding", "won't stop bleeding", "wont stop bleeding",
+        "throat swelling", "swollen throat", "lips swelling", "swollen lips", "anaphylaxis",
+        "worst headache", "stiff neck",
+        "coughing blood", "coughing up blood", "vomiting blood", "blood in vomit",
+        "blue lips", "overdose", "poisoned", "poisoning"
+    ],
+
+    "crisis": [
+        "suicide", "suicidal", "kill myself", "end my life", "want to die",
+        "self harm", "self-harm", "hurt myself", "harm myself", "no reason to live"
+    ]
+}

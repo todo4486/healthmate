@@ -1,0 +1,16 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets and local settings (never commit these)
+.env
+*serviceAccount*.json
+firebase-adminsdk*.json
+
+# OS / editor files
+.DS_Store
+.vscode/
+.idea/

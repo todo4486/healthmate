@@ -11,8 +11,8 @@
 //
 // While these are empty, sign-in is switched off and the site shows a notice.
 export const firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    appId: "",
+    apiKey: "AIzaSyB6JDXbjQmRZOaWOIDLwoZCUMozn5oLLgw",
+    authDomain: "health-mate-83258.firebaseapp.com",
+    projectId: "health-mate-83258",
+    appId: "1:11394109353:web:b8909eb095c66a602afeb8",
 };

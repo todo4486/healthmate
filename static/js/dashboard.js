@@ -60,9 +60,12 @@ function showChecks(uid, checks) {
     const list = document.querySelector("[data-check-list]");
     list.replaceChildren(...checks.slice(0, 5).map((check) => {
         const item = template.content.firstElementChild.cloneNode(true);
-        const [tagClass, tagText] = LEVEL_TAGS[check.level] || ["", "Result"];
+        // Unknown values (e.g. a write the server is about to reject) still draw safely.
+        const [tagClass, tagText] = LEVEL_TAGS[check.level] || [null, "Saved check"];
         const level = item.querySelector("[data-check-level]");
-        level.classList.add(tagClass);
+        if (tagClass) {
+            level.classList.add(tagClass);
+        }
         level.textContent = tagText;
 
         const date = item.querySelector("[data-check-date]");

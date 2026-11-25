@@ -77,14 +77,32 @@ configuration; broken links; browser console; Python errors; performance.
 | Production server (gunicorn, `APP_ENV=production`): health check, headers incl. HSTS, API, 404 | Pass |
 | Clean install of `requirements.txt` + `pip check` | Pass |
 
-### Not yet tested (needs your Firebase project)
+### Live Firebase tests (25 November 2026, project `health-mate-83258`, rules published)
 
-Real registration, login, wrong password, Google sign-in, logout, password-reset
-email, creating, ticking, unticking, deleting and refreshing habits, saving and
-deleting symptom checks, dashboard sync, isolation between two accounts, and
-the published rules. These flows are written and code-reviewed, and the live
-test table in `docs/DEPLOYMENT.md` (section 7) covers each of them.
-**Run it once Firebase is set up.**
+| Test | Result |
+|---|---|
+| Register with email (done by the project owner) → Dashboard "Hello, test" | Pass |
+| Profile document holds only `displayName` and `createdAt` | Pass |
+| Habit: empty name rejected; add; duplicate name rejected | Pass |
+| Habit: tick → 1 of 2 (50%); untick → 0 of 2 | Pass |
+| Refresh the page: habits and ticks still there | Pass |
+| Tick on the Dashboard → shown ticked in the Habit Tracker | Pass |
+| Delete: Cancel keeps it; Delete removes it and today's tick | Pass |
+| Symptom check saved → on Dashboard; only the 6 allowed fields stored (no description) | Pass |
+| Saved check deleted from the Dashboard → empty state | Pass |
+| Signed-in user opening `/login` → sent to the Dashboard | Pass |
+| Log out → Home, header shows Log in / Sign up | Pass |
+| Signed out, open `/habits` → `/login?next=%2Fhabits` | Pass |
+| **Rules, signed in:** read another user's profile, habits or checks; write into another user; list all users; extra field; bad category; empty or 61-character name; fake `createdAt`; free text in a symptom check; bad result level; bad log date; top-level collection | **All 14 refused** (`permission-denied`) by Google's servers |
+| **Rules, signed out:** read any user's habits | Refused |
+
+Bug found and fixed during these tests: the Dashboard crashed when Firestore
+briefly showed a write that the server then rejected (unknown result level).
+Unknown values now display safely.
+
+Still to test by hand (they need you to type a password or use Google's
+popup): wrong password, Google sign-in, password-reset email, and
+`?next=` redirect after a real login.
 
 ## 5. Remaining limitations
 

@@ -49,8 +49,10 @@ export function renderHabits(list, { habits, completedIds }, options) {
 
         // textContent never interprets HTML, so habit names can't inject code.
         item.querySelector(".habit__name").textContent = habit.name;
-        item.querySelector(".habit__category").textContent = CATEGORY_LABELS[habit.category] || "Other";
-        item.querySelector(".dot").classList.add(`dot--${habit.category}`);
+        // Unknown categories (e.g. a write the server is about to reject) show as "Other".
+        const category = habit.category in CATEGORY_LABELS ? habit.category : "other";
+        item.querySelector(".habit__category").textContent = CATEGORY_LABELS[category];
+        item.querySelector(".dot").classList.add(`dot--${category}`);
 
         const check = item.querySelector(".habit__check");
         check.setAttribute("aria-pressed", String(done));
